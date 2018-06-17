@@ -1,1 +1,7 @@
 ---
+- hosts: dev-server
+  become: yes
+  become_user: root
+  roles:
+    - role: docker
+    - role: docker-compose
