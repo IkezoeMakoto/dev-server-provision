@@ -1,0 +1,8 @@
+---
+developer_name: developer
+developer_uid: 1000
+
+developer_group: developer
+developer_gid: 2000
+
+developer_home_dir: "/home/developer/"

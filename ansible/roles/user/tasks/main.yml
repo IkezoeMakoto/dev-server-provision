@@ -1,0 +1,23 @@
+---
+- name: add group developer
+  group: name={{ developer_group }} gid={{ developer_gid }} state=present
+
+- name: check developer's home directory
+  stat: path=/home/{{ developer_name }}
+  register: developer_home_dir
+
+- name: add user developer
+  user: name={{ developer_name }} uid={{ developer_uid }} group={{ developer_group }} state=present
+  when: developer_home_dir.stat.exists == false
+
+- name: chmod 755 /home/{{ developer_name }}
+  file: path=/home/{{ developer_name }} state=directory owner={{ developer_name }} group={{ developer_group }} mode=0755
+
+- name: create directory .ssh
+  file: path=/home/{{ developer_name }}/.ssh state=directory owner={{ developer_name }} group={{ developer_group }} mode=0700
+
+- name: set ssh pub key
+  copy: src={{ stage }}/authorized_keys dest="/home/{{ developer_name }}/.ssh/" owner={{ developer_name }} group={{ developer_group }} mode=0644
+
+- name: set id_rsa
+  copy: src={{ stage }}/id_rsa dest="/home/{{ developer_name }}/.ssh/" owner={{ developer_name }} group={{ developer_group }} mode=0600

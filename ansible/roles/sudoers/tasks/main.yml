@@ -1,0 +1,3 @@
+---
+- name: configure sudoers default
+  lineinfile: dest=/etc/sudoers line="{{ developer_name }}    ALL=(ALL)    ALL"

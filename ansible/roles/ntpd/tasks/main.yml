@@ -1,0 +1,11 @@
+---
+- name: install ntp
+  yum: name=ntp state=latest
+
+- name: configure ntp.conf
+  copy: src="ntp.conf" dest="/etc/ntp.conf" owner=root group=root
+  notify: restart ntpd
+
+- name: Be sure NTPd is running and enabled
+  service: name=ntpd state=started enabled=yes
+  ignore_errors: "{{ ansible_check_mode }}"
