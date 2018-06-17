@@ -1,4 +1,4 @@
 ---
 - import_playbook: init.yml
 
-#- import_playbook: dev-server.yml
+- import_playbook: dev-server.yml
