@@ -11,12 +11,7 @@
     mode: "a+x"
   when: get_compose.changed
 
-- name: Get docker-compose ver
-  shell: docker-compose --version | awk 'NR==1{print $NF}'
-  register: docker_compose_ver
-  changed_when: false
-
 - name: Install command completion
   get_url:
-    url: "https://raw.githubusercontent.com/docker/compose/{{docker_compose_ver.stdout}}/contrib/completion/bash/docker-compose"
+    url: "https://raw.githubusercontent.com/docker/compose/1.21.2/contrib/completion/bash/docker-compose"
     dest: /etc/bash_completion.d/docker-compose
