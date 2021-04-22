@@ -4,3 +4,4 @@ services:
     build: ./ansible
     volumes:
       - ./ansible:/app
+      - ~/.ssh:/root/.ssh
