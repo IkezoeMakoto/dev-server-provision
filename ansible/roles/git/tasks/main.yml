@@ -1,0 +1,26 @@
+---
+- name: install development yum packages
+  yum: name={{ item }} state=present
+  with_items:
+    - gcc
+    - gcc-c++
+    - openssl-devel
+    - readline-devel
+    - unzip
+    - yum-utils
+
+- name: install yum repository in order to install the newest git
+  yum:
+    name: 'https://repo.ius.io/ius-release-el7.rpm'
+    state: present
+  register: ius_repository
+
+- name: disable ius repository
+  shell: yum-config-manager --disable ius
+  when: ius_repository.changed
+
+- name: install the newest git
+  yum:
+    name: git224-all
+    enablerepo: ius
+    state: present
