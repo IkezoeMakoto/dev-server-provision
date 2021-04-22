@@ -1,0 +1,16 @@
+---
+- name: install yum repository in order to bash-completion-extras
+  yum:
+    name: 'https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm'
+    state: present
+  register: epel_repository
+
+- name: disable epel repository
+  shell: yum-config-manager --disable epel
+  when: epel_repository.changed
+
+- name: install bash_completion
+  yum: name={{ item }} state=present enablerepo=epel
+  with_items:
+    - bash-completion
+    - bash-completion-extras
