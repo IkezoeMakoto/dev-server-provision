@@ -5,3 +5,5 @@
   roles:
     - role: docker
     - role: docker-compose
+    - role: awscli
+    - role: mysql-client
