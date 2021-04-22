@@ -7,6 +7,3 @@
     name=docker
     state=started
     enabled=yes
-
-- name: enable docker for dev user
-  user: name={{ developer_name }} group=docker append=yes
