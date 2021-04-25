@@ -1,10 +1,10 @@
 ---
-- hosts: dev-server
+- hosts: dev_server
   become: yes
   become_user: root
   roles:
     - role: bash_completion
-    - role: git
+    - role: develop
     - role: docker
     - role: docker-compose
     - role: awscli

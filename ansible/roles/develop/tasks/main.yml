@@ -1,13 +1,14 @@
 ---
 - name: install development yum packages
-  yum: name={{ item }} state=present
-  with_items:
-    - gcc
-    - gcc-c++
-    - openssl-devel
-    - readline-devel
-    - unzip
-    - yum-utils
+  yum:
+    state: present
+    name:
+      - gcc
+      - gcc-c++
+      - openssl-devel
+      - readline-devel
+      - unzip
+      - yum-utils
 
 - name: install yum repository in order to install the newest git
   yum:
@@ -24,3 +25,10 @@
     name: git224-all
     enablerepo: ius
     state: present
+
+- name: install develop items
+  yum:
+    state: present
+    name:
+      - vim
+      - wget
